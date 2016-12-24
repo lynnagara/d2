@@ -1,0 +1,21 @@
+{
+  "name": "draw",
+  "version": "0.0.1",
+  "description": "js library for drawing",
+  "scripts": {
+    "build": "make build"
+  },
+  "author": "Lyn Nagara",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "preact": "^7.1.0",
+    "webpack": "^1.14.0"
+  },
+  "devDependencies": {},
+  "main": "js/index.js"
+}
