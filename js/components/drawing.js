@@ -1,41 +1,62 @@
 /* eslint-disable no-unused-vars */
 import {h, Component} from 'preact'
+import Actions from '../actions/actions.js'
+import colorsStore from '../store/colors.js'
 
 class Drawing extends Component {
   constructor() {
     super()
     this.setState({'isDrawing': false})
+    Actions.clearCanvasStream$.subscribe(() => this.clearCanvas())
+  }
+
+  clearCanvas() {
+    this.context.clearRect(0,0, this.base.clientWidth, this.base.clientHeight)
   }
 
   addDot(x, y) {
     this.context.fillRect(x, y, 1, 1)
+    this.context.fillStyle = colorsStore.getForeground()
     this.context.stroke()
   }
 
-  onMouseDown(event) {
-    this.setState({isDrawing: true})
-    console.log('mouse down')
+  drawLine([x1, y1], [x2, y2]) {
+    this.context.strokeStyle = colorsStore.getForeground()
+    this.context.beginPath()
+    this.context.moveTo(x1, y1)
+    this.context.lineTo(x2, y2)
+    this.context.stroke()
   }
 
-  onMouseUp(event) {
-    // draw rest of line
-    this.addDot(event.offsetX, event.offsetY)
+  onMouseDown({offsetX, offsetY}) {
+    this.setState({
+      isDrawing: true,
+      lastPosition: [offsetX, offsetY]
+    })
+    this.addDot(offsetX, offsetY)
+  }
+
+  onMouseUp({offsetX, offsetY}) {
+    this.addDot(offsetX, offsetY)
     this.setState({isDrawing: false})
   }
 
-  onMouseMove(event) {
-    this.addDot(event.offsetX, event.offsetY)
+  onMouseMove({offsetX, offsetY}) {
+    this.drawLine(this.state.lastPosition, [offsetX, offsetY])
+    this.setState({
+      lastPosition: [offsetX, offsetY]
+    })
   }
 
   render(_props, state) {
     return (
       <canvas
-        style={{flex: 1, cursor: 'default'}}
+        style={{'flex': 1, 'cursor': 'default'}}
         width={state.width}
         height={state.height}
-        onMouseDown={this.onMouseDown.bind(this)}
-        onMouseUp={this.onMouseUp.bind(this)}
-        onMouseMove={state.isDrawing ? this.onMouseMove.bind(this) : ''} />
+        onMouseDown={(event) => this.onMouseDown(event)}
+        onMouseUp={(event) => this.onMouseUp(event)}
+        onMouseMove={(event) => state.isDrawing ? this.onMouseMove(event) : ''} />
     )
   }
   componentDidMount() {

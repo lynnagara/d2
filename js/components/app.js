@@ -7,9 +7,9 @@ class App extends Component {
   render({width, height}) {
     const style = {
       container: {
-        width: width,
-        height: height,
-        display: 'flex'
+        'width': width,
+        'height': height,
+        'display': 'flex'
       }
     }
 
