@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { h, render } from 'preact'
 import App from './components/app.js'
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {h, Component} from 'preact'
 import LeftPanel from './leftpanel.js'
 import Drawing from './drawing.js'

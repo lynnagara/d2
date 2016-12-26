@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {h, Component} from 'preact'
 
 class Drawing extends Component {
