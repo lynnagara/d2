@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import {h, Component} from 'preact'
-import LeftPanel from './leftpanel.js'
-import Drawing from './drawing.js'
+import Sidebar from './sidebar/index.js'
+import Layers from './layers.js'
 
 class App extends Component {
   render({width, height}) {
@@ -15,8 +15,8 @@ class App extends Component {
 
     return (
       <div style={style.container}>
-        <LeftPanel />
-        <Drawing />
+        <Sidebar />
+        <Layers />
       </div>
     )
   }

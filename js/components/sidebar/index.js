@@ -1,35 +1,31 @@
 /* eslint-disable no-unused-vars */
 import {h, Component} from 'preact'
-import Actions from '../actions/actions.js'
-import Dropdowns from '../store/dropdowns.js'
-import Dropdown from './dropdown.js'
+import Actions from '../../actions/actions.js'
+import Dropdown from '../dropdown.js'
 import Colors from './colors.js'
+import Layers from './layers.js'
 
-class LeftPanel extends Component {
-  clearCanvas() {
-    Actions.clearCanvasStream$.next()
-  }
-
+class Sidebar extends Component {
   render() {
     const style = {
-      leftpanel: {
+      sidebar: {
         'width': '120px'
       }
     }
 
     return (
       <section>
-        <div style={style.leftpanel}>Drawing app</div>
+        <div style={style.sidebar}>Drawing app</div>
         <section>
           <Dropdown>
             <button key="dropdown-button">Colors</button>
             <div key="dropdown-target"><Colors /></div>
           </Dropdown>
         </section>
-        <button onClick={this.clearCanvas}>Clear</button>
+        <Layers />
       </section>
     )
   }
 }
 
-export default LeftPanel
+export default Sidebar

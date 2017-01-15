@@ -1,7 +1,9 @@
-import Rx from 'rxjs/Rx'
+import Store from '../store/index.js'
 
 const Actions = {
-  clearCanvasStream$: new Rx.Subject()
+  initApp: function() {
+    Store.Layers.new()
+  }
 }
 
 export default Actions

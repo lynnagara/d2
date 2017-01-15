@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import {h, Component} from 'preact'
-import colorsStore from '../store/colors.js'
+import ColorsStore from '../../store/colors.js'
 
 class Colors extends Component {
   selectColor(color) {
-    colorsStore.setForeground(color)
+    ColorsStore.setForeground(color)
   }
 
   render(props, state) {
@@ -22,9 +22,10 @@ class Colors extends Component {
       }
     }
 
-    const colorsList = colorsStore.getPresets().map((color) => {
+    const colorsList = ColorsStore.getPresets().map((color) => {
       return (
         <div
+          key={color}
           style={{...styles.colorBase, 'background-color': color}}
           onClick={() => this.selectColor(color)}>
         </div>
